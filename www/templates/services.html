@@ -1,0 +1,13 @@
+<ion-view title="Services">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+
+  <ion-content class="has-header">
+    <ion-list>
+      <ion-item ng-repeat="service in services" href="#/app/services/{{service.id}}">
+        {{service.title}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
