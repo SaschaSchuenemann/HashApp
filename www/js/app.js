@@ -28,40 +28,21 @@ angular.module('starter', ['ionic', 'ngStorage','starter.controllers'])
       templateUrl: "templates/menu.html",
       controller: 'AppCtrl'
     })
-
-    .state('app.search', {
-      url: "/search",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/search.html"
-        }
-      }
-    })
-
-    .state('app.browse', {
-      url: "/browse",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/browse.html"
-        }
-      }
-    })
     .state('app.services', {
       url: "/services",
       views: {
         'menuContent' :{
           templateUrl: "templates/services.html",
-          controller: 'PlaylistsCtrl'
+          controller: 'AppCtrl'
         }
       }
     })
-
     .state('app.single', {
       url: "/services/:serviceId",
       views: {
         'menuContent' :{
           templateUrl: "templates/service.html",
-          controller: 'PlaylistCtrl'
+          controller: 'ServiceCtrl'
         }
       }
     });

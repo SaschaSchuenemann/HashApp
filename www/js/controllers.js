@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $localStorage,
+.controller('AppCtrl', function($scope, $stateParams, $ionicModal, $timeout, $localStorage,
     $sessionStorage) {
   // Form data for the login modal
   $scope.newService = {};
@@ -42,7 +42,9 @@ angular.module('starter.controllers', [])
   $scope.closeServicePassword = function() {
     window.location.replace("#/app/services"); 
     $scope.servicePasswordModal.hide();
+    console.log("closed service Password");
     $scope.servicePassword.name = "";
+    console.log("removed password");
   };
 
   // Triggered in the addService modal to close it
@@ -58,16 +60,18 @@ angular.module('starter.controllers', [])
     $scope.setPasswordModal.hide();
   };
 
+  /*
   // Open the servicePassword modal
   $scope.showServicePassword = function() {
     console.log($stateParams);
     console.log("Generating password using: " + $scope.servicePassword.name + $scope.currentService.name + $scope.$storage.masterPassword.name);
-    var hash = CryptoJS.SHA3($scope.servicePassword.name + $scope.currentService.name + $scope.$storage.masterPassword.name );
-    var password = hash.toString(CryptoJS.enc.Base64);
-    console.log(password);
-    $scope.servicePassword.name = password;
+    //var hash = CryptoJS.SHA3($scope.servicePassword.name + $scope.currentService.name + $scope.$storage.masterPassword.name );
+    //var password = hash.toString(CryptoJS.enc.Base64);
+    //console.log(password);
+    //$scope.servicePassword.name = password;
     $scope.servicePasswordModal.show();
   };
+  */
 
   // Open the addService modal
   $scope.showAddService = function() {
@@ -95,24 +99,28 @@ angular.module('starter.controllers', [])
     $scope.closeAddService();
   };
   
-  // Perform the add service action when the user submits the login form
+  // run when set password is clicked in setPassword modal
   $scope.setPassword = function() {
     console.log('setting password', $scope.masterPassword.name);
+    // save current password in storage
     $scope.$storage.masterPassword=angular.copy($scope.masterPassword);
     $scope.closeSetPassword();
   };
   
 })
-
-.controller('PlaylistsCtrl', function(
-  $scope) {
-  
-  //$scope.currentService = 'my service';
-})
-
-.controller('PlaylistCtrl', function(
+.controller('ServiceCtrl', function(
   $scope,
   $stateParams) {
   $scope.currentServiceOld = $stateParams.serviceId;
   $scope.currentService = $scope.$storage.services[$stateParams.serviceId-1];
+
+    // Open the servicePassword modal
+  $scope.showServicePassword = function() {
+    console.log($stateParams);
+    console.log("Generating password using: " + $scope.servicePassword.name + $scope.currentService.name + $scope.$storage.masterPassword.name);
+    var password = passLib.genPass($scope.servicePassword.name , $scope.currentService.name , $scope.$storage.masterPassword.name , 50);
+    console.log(password);
+    $scope.servicePassword.name = password;
+    $scope.servicePasswordModal.show();
+  };
 });
