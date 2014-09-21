@@ -7,8 +7,8 @@
 
   <ion-content class="has-header">
     <ion-list>
-      <ion-item ng-repeat="service in $storage.services" href="#/app/services/{{service.id}}">
-        {{service.name}}
+      <ion-item ng-repeat="site in sites" href="#/app/services/{{site.id}}">
+        {{site.name}}
       </ion-item>
     </ion-list>
       <!-- DEBUG
