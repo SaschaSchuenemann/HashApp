@@ -41,7 +41,7 @@ var init = function(){
 		  if(pw[i].className == 'patternlock'){
 		  	generate(pw[i]);
 		  }
-		 if((pw[i].type=='submit') && (autoSubmit)){
+		 if (pw[i].type=='submit'){
 			 pw[i].style.display = 'none';
 		 }
 	  }
@@ -50,7 +50,7 @@ var init = function(){
 
 var generate= function(el){
 	inputbox = el;
-	el.style.display = 'none';
+	//el.style.display = 'none';
 	var pel = el.parentNode;
 	
 	// main container
@@ -183,6 +183,7 @@ var buttonTouchStart = function(b){
 	from = "";
 	to = b.id.split("patternlockbutton").join("");
 	inputbox.value = to;
+  $(".patternlock").trigger('input');
 	startbutton = to;
 	return false;
 };
@@ -205,6 +206,7 @@ var buttonTouchOver = function(b){
 			
 			//update input value
 			inputbox.value += to;
+      $(".patternlock").trigger('input');
 			
 			// display line between 2 buttons 
 			var thisline = document.getElementById("line" + from + to);
@@ -259,14 +261,19 @@ var buttonTouchEnd = function(){
         isdrawing = false;
         gridsize = false; // set to false so on the next touch it's recalculated as the layout could have been changed
         if (autoSubmit){
+          $("#submitButton").trigger('click');
+          /*
             var doSubmit = true;
             if (document.forms[0].onsubmit){ doSubmit = document.forms[0].onsubmit() }
             if(doSubmit){
                 document.forms[0].submit();
             }
+            
+            */
+           //window.location.replace("#/app/services"); 
 						
         }
-				clear();
+				//clear();
 	}
 	return(false)
 	
@@ -282,6 +289,8 @@ var clear = function(){
         lines[i].style.visibility = 'hidden';
     }
     inputbox.value = "";
+    $(".patternlock").trigger('input');
+
 };
 
 // helper function to find the absolute position of an element

@@ -7,26 +7,20 @@
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-pane>
 
-  <ion-side-menu side="left">
+  <ion-side-menu side="right">
     <header class="bar bar-header bar-stable">
-      <h1 class="title">Left</h1>
+      <h1 class="title">Settings</h1>
     </header>
     <ion-content class="has-header">
       <ion-list>
-        <ion-item nav-clear menu-close ng-click="login()">
-          Login
+        <ion-item nav-clear menu-close ng-click="showAddService()">
+          add Service
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/search">
+        <!--<ion-item nav-clear menu-close href="#/app/search">
           Search
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/browse">
-          Browse
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/services">
-          Playlists
-        </ion-item>
-        <ion-item nav-clear menu-close ng-click="pattern()" href="#/app/playlists">
-          Pattern
+        </ion-item>-->
+        <ion-item nav-clear menu-close ng-click="showSetPassword()">
+          set Password
         </ion-item>
       </ion-list>
     </ion-content>

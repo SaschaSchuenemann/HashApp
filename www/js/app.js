@@ -25,7 +25,6 @@ angular.module('starter', ['ionic', 'ngStorage','starter.controllers'])
 
     .state('app', {
       url: "/app",
-      abstract: true,
       templateUrl: "templates/menu.html",
       controller: 'AppCtrl'
     })
