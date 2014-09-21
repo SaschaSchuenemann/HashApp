@@ -8,13 +8,11 @@
     <h1>{{currentService.name}}</h1>
     <form>
 <div id="main" class="main">
-  This is my password: {{servicePassword.name}}
-  This is a new line:
   <div id="pattern">
     <input type="text" id="password"  value="00000" ng-model="servicePassword.name" name="password" class="patternlock" />
     <input type="submit" id="submitButton" value="login" ng-click="showServicePassword()" href="#/app/services"/>
   </div>
-
+    
 
 </div>
 
