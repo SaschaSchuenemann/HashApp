@@ -28,25 +28,25 @@ angular.module('starter', ['ionic', 'ngStorage','starter.controllers'])
       templateUrl: "templates/menu.html",
       controller: 'AppCtrl'
     })
-    .state('app.services', {
-      url: "/services",
+    .state('app.sites', {
+      url: "/sites",
       views: {
         'menuContent' :{
-          templateUrl: "templates/services.html",
+          templateUrl: "templates/sites.html",
           controller: 'AppCtrl'
         }
       }
     })
     .state('app.single', {
-      url: "/services/:serviceId",
+      url: "/sites/:siteId",
       views: {
         'menuContent' :{
-          templateUrl: "templates/service.html",
-          controller: 'ServiceCtrl'
+          templateUrl: "templates/site.html",
+          controller: 'SiteCtrl'
         }
       }
     });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/services');
+  $urlRouterProvider.otherwise('/app/sites');
 });
 

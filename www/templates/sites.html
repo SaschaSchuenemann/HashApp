@@ -6,9 +6,12 @@
 <ion-nav-view animation="slide-left-right"></ion-nav-view>
 
   <ion-content class="has-header">
-    <ion-list>
-      <ion-item ng-repeat="site in sites" href="#/app/services/{{site.id}}">
-        {{site.name}}
+    <ion-list option-buttons="itemButtons">
+      <ion-item ng-repeat="site in sites" item="site" href="#/app/sites/{{site.id}}">
+          <h2>{{site.name}}</h2>
+          <ion-option-button ng-click="edit(site)">
+              Edit
+          </ion-option-button>
       </ion-item>
     </ion-list>
       <!-- DEBUG

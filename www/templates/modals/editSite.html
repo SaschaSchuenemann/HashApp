@@ -1,0 +1,37 @@
+<div class="modal">
+  <ion-header-bar>
+    <h1 class="title">Add Site</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeEditSite()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="closeEditSite()">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Service Name</span>
+          <input type="text" ng-model="activeSite.name">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">URL</span>
+          <input type="text" ng-model="activeSite.url">
+        </label>
+          <label class="item item-input">
+              <span class="input-label">Password Version</span>
+              <input type="number" ng-model="activeSite.version">
+          </label>
+          </div>
+        <div class="list">
+            <h2>Password Requirements</h2>
+            <label class="item item-input">
+                <span class="input-label">Password Length</span>
+                <input type="number" ng-model="activeSite.passwordRequirements.length">
+            </label>
+        </div>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Save changes</button>
+        </label>
+    </form>
+  </ion-content>
+</div>
+

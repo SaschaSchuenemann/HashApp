@@ -2,23 +2,30 @@
  * Created by sascha on 9/21/14.
  */
 angular.module('starter.controllers').controller('AppCtrl', function($scope, $stateParams, $ionicModal, $timeout, $localStorage,
-                                                                     $sessionStorage, sitesService) {
+                                                                     $sessionStorage, sitesService,passwordService) {
     // bind to ojects from service
     $scope.sites = sitesService.getSites();
-    $scope.masterPassword = sitesService.getMasterPassword();
+    $scope.masterPassword = passwordService.getMasterPassword();
     $scope.configuration = sitesService.getConfiguration();
 
     // create empty objects needed by modals
-    $scope.newService = {};
+    $scope.newSite = {};
     $scope.newMasterPassword = {};
-    $scope.servicePassword = {};
+    $scope.sitePassword = {};
 
 
-// Create the add service modal
-    $ionicModal.fromTemplateUrl('templates/modals/addService.html', {
+// Create the add site modal
+    $ionicModal.fromTemplateUrl('templates/modals/addSite.html', {
         scope: $scope
     }).then(function(modal) {
-        $scope.addServiceModal = modal;
+        $scope.addSiteModal = modal;
+    });
+
+    // Create the add site modal
+    $ionicModal.fromTemplateUrl('templates/modals/editSite.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.editSiteModal = modal;
     });
 
 // Create the setPassword modal
@@ -29,48 +36,59 @@ angular.module('starter.controllers').controller('AppCtrl', function($scope, $st
         $scope.setPasswordModal = modal;
     });
 
-// Create the servicePassword modal
-    $ionicModal.fromTemplateUrl('templates/modals/servicePassword.html', {
+// Create the sitePassword modal
+    $ionicModal.fromTemplateUrl('templates/modals/sitePassword.html', {
         scope: $scope,
         backdropClickToClose : false
     }).then(function(modal) {
-        $scope.servicePasswordModal = modal;
+        $scope.sitePasswordModal = modal;
     });
 
-// Create the add service modal
+// Create the add site modal
     $ionicModal.fromTemplateUrl('templates/modals/confPassword.html', {
         scope: $scope
     }).then(function(modal) {
         $scope.confPasswordModal = modal;
     });
 
-// Triggered in the servicePassword modal to close it
-    $scope.closeServicePassword = function() {
-        window.location.replace("#/app/services");
-        $scope.servicePasswordModal.hide();
-        console.log("closed service Password");
-        $scope.servicePassword.name = "";
+// Triggered in the sitePassword modal to close it
+    $scope.closeSitePassword = function() {
+        window.location.replace("#/app/sites");
+        $scope.sitePasswordModal.hide();
+        console.log("closed site Password");
+        $scope.sitePassword.name = "";
         console.log("removed password");
     };
 
-// Triggered in the addService modal to close it
-    $scope.closeAddService = function() {
-        $scope.addServiceModal.hide();
+// Triggered in the addSite modal to close it
+    $scope.closeAddSite = function() {
+        $scope.addSiteModal.hide();
     };
 
-// Triggered in the addService modal to close it
+    // Triggered in the addSite modal to close it
+    $scope.closeEditSite = function() {
+        $scope.editSiteModal.hide();
+    };
+
+// Triggered in the addSite modal to close it
     $scope.closeSetPassword = function() {
         $scope.setPasswordModal.hide();
     };
 
-// Triggered in the addService modal to close it
+// Triggered in the addSite modal to close it
     $scope.closeConfPassword = function() {
         $scope.confPasswordModal.hide();
     };
 
-// Open the addService modal
-    $scope.showAddService = function() {
-        $scope.addServiceModal.show();
+// Open the addSite modal
+    $scope.showAddSite = function() {
+        //$scope.newSite.passwordRequirements = angular.copy($scope.configuration.passwordRequirements);
+        $scope.addSiteModal.show();
+    };
+
+    // Open the addSite modal
+    $scope.showEditSite = function() {
+        $scope.editSiteModal.show();
     };
 
 // Open the setPassword modal
@@ -85,16 +103,22 @@ angular.module('starter.controllers').controller('AppCtrl', function($scope, $st
 
 // set master password when user submits the form in setPassword modal
     $scope.setPassword = function(){
-        sitesService.setMasterPassword($scope.newMasterPassword);
+        passwordService.setMasterPassword($scope.newMasterPassword);
         $scope.newMasterPassword = {};
+        $scope.closeSetPassword();
     }
 
-// Perform the add service action when the user submits the form in addService modal
-    $scope.addService = function() {
-        console.log('adding service', $scope.newService);
-        sitesService.addSite($scope.newService);
-        $scope.closeAddService();
+// Perform the add site action when the user submits the form in addSite modal
+    $scope.addSite = function() {
+        console.log('adding site', $scope.newSite);
+        sitesService.addSite($scope.newSite);
+        $scope.newService = {};
+        $scope.closeAddSite();
     };
 
+    $scope.edit = function(site) {
+        $scope.activeSite = site;
+        $scope.showEditSite();
+    }
 
 });
