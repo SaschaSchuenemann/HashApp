@@ -12,6 +12,7 @@ angular.module('starter.controllers').controller('AppCtrl', function($scope, $st
     $scope.newSite = {};
     $scope.newMasterPassword = {};
     $scope.sitePassword = {};
+    $scope.login = {name: 'none'};
 
 
 // Create the add site modal
@@ -49,6 +50,13 @@ angular.module('starter.controllers').controller('AppCtrl', function($scope, $st
         scope: $scope
     }).then(function(modal) {
         $scope.confPasswordModal = modal;
+    });
+    
+// Create the login modal
+    $ionicModal.fromTemplateUrl('templates/modals/login.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.loginModal = modal;
     });
 
 // Triggered in the sitePassword modal to close it
@@ -100,12 +108,22 @@ angular.module('starter.controllers').controller('AppCtrl', function($scope, $st
     $scope.showConfPassword = function() {
         $scope.confPasswordModal.show();
     };
+    
+// Open the login modal
+    $scope.showLogin = function() {
+        $scope.loginModal.show();
+    };
 
 // set master password when user submits the form in setPassword modal
     $scope.setPassword = function(){
         passwordService.setMasterPassword($scope.newMasterPassword);
         $scope.newMasterPassword = {};
         $scope.closeSetPassword();
+    }
+
+// sets the user for the current session
+    $scope.closeLogin = function(){
+        $scope.loginModal.hide();
     }
 
 // Perform the add site action when the user submits the form in addSite modal

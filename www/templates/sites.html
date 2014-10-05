@@ -1,4 +1,5 @@
-<ion-view title="Services">
+<ion-view title="Sites">
+
   <ion-nav-buttons side="right">
     <button menu-toggle="right" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
@@ -6,6 +7,7 @@
 <ion-nav-view animation="slide-left-right"></ion-nav-view>
 
   <ion-content class="has-header">
+    <h2>user:{{login.name}}</h2>
     <ion-list option-buttons="itemButtons">
       <ion-item ng-repeat="site in sites" item="site" href="#/app/sites/{{site.id}}">
           <h2>{{site.name}}</h2>
